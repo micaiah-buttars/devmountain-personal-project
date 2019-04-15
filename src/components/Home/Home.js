@@ -1,12 +1,26 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {requestAllStudents} from '../../ducks/reducer'
 
-export default class Home extends Component {
-    // componentDidMount(){
-    //     this.viewAll()
-    // }
+class Home extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            retrieved: false
+        }
+    }
+    componentDidMount(){
+        this.getData()
+    }
+    getData(){
+        this.props.requestAllStudents()
+    }
+    
 
     render(){
+        console.log(this.props)
+        const {students} = this.props.students
         return (
             <div>
                 <h1>Home</h1>
@@ -14,8 +28,20 @@ export default class Home extends Component {
                     <input type='text'/>
                     <input type='text'/>
                 </form>
-                <Link to='/student'>Student</Link>
+                
+                {/* {students.map((student) => 
+                <Link to={`/student/${student.student_name}`}>
+                <div>{student.student_name}</div>
+                </Link>
+                ) } */}
+                
+
+
             </div>
         )
     }
 }
+
+const mapState = (reduxState) => reduxState
+
+export default connect(mapState, {requestAllStudents})(Home)

@@ -6,7 +6,7 @@ export default class Student extends Component {
         return (
             <div>
                 <h1>Student</h1>
-                <Link to='/home'>Back</Link>
+                <Link to='/'>Back</Link>
             </div>
         )
     }

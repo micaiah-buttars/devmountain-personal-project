@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const initialState = {
+    students: []
 
 }
 
@@ -17,7 +18,9 @@ export const requestAllStudents = () => {
 export default function(state = initialState, action){
     switch(action.type){
         case REQUEST_ALL_STUDENTS + '_FULFILLED':
-            console.log(action.payload)
-            const {student_id, student_name, reminder_interval} = action.payload
+            // const {student_id, student_name, reminder_interval} = action.payload
+            return {students: action.payload}
+        default:
+            return state
     }
 }

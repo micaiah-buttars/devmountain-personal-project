@@ -11,7 +11,7 @@ export default class Login extends Component {
                     <input type='password'/>
                     <button>Log In</button>
                 </form>
-                <Link to='/home'>Login</Link>
+                <Link to='/'>Login</Link>
             </div>
         )
     }
