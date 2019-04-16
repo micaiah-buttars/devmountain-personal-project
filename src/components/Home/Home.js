@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {requestAllStudents} from '../../ducks/reducer'
+import StudentBehaviors from './StudentBehaviors/StudentBehaviors'
 import StudentContainer from './StudentContainer/StudentContainer'
 
 class Home extends Component {
@@ -13,10 +14,8 @@ class Home extends Component {
         return (
             <div>
                 <h1>Home</h1>
-                <form>
-                    <input type='text'/>
-                    <input type='text'/>
-                </form>
+                <StudentBehaviors />
+
                 {/* Put default values in initial state */}
                 {students.map((student) => 
                 <StudentContainer

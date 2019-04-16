@@ -8,12 +8,12 @@ insert into reminder_interval ( reminder_interval)
 values (5),(10),(15),(30),(60);
 
 
-create table behavior_value (
-    behavior_value_id serial primary key,
-    behavior_value varchar(10)
-);
-insert into behavior_value (behavior_value)
-values ('positive'),('negative');
+-- create table behavior_value (
+--     behavior_value_id serial primary key,
+--     behavior_value varchar(10)
+-- );
+-- insert into behavior_value (behavior_value)
+-- values ('positive'),('negative');
 
 
 
@@ -34,11 +34,13 @@ alter table student
 
 
 create table behavior (
-    behavior_id serial primary key
+    behavior_id serial primary key,
+    behavior_name varchar(80),
+    behavior_desc varchar(250)
 );
 alter table behavior
-    add column behavior_value int,
-    add foreign key (behavior_value) references behavior_value (behavior_value_id);
+    add column assoc_student_id int,
+    add foreign key (assoc_student_id) references student (student_id);
 
 
 create table time_slot (
