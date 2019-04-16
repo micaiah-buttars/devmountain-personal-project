@@ -18,4 +18,5 @@ massive(CONNECTION_STRING)
 })
 
 app.get('/students-data', students.viewAllStudents)
+app.get('/student-data/:id', students.viewStudent)
 

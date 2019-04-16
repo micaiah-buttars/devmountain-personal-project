@@ -1,0 +1,21 @@
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 50%;
+    margin: 0 auto;
+    background-color: grey;
+    padding: 3em;
+    border-radius: .4em;
+
+
+}
+input[type=text], input[type=password] {
+    padding: 1.1em;
+    padding-left: 2em;
+    margin: 1em;
+    font-size: 1.3em;
+    border-radius: 5em;
+    border: none;
+
+}

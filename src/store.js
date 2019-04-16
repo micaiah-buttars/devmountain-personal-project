@@ -1,4 +1,5 @@
-import {createStore, combineReducers, applyMiddleware} from 'redux'
+import {createStore, applyMiddleware} from 'redux'
+// import {combineReducers} from 'redux'
 import promiseMiddleware from 'redux-promise-middleware'
 import reducer from './ducks/reducer'
 

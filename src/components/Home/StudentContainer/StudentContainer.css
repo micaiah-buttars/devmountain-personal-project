@@ -1,0 +1,21 @@
+a:link {
+    text-decoration: none;
+    color: black;
+  }
+a:visited {
+    text-decoration: none;
+    color: black;
+  }
+
+.studentContainer {
+    display: flex;
+    justify-content: space-between;
+    border-radius: .5em;
+    padding: 2em;
+    align-items: center;
+    width: 85%;
+    background-color: grey;
+    margin: 0 auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}

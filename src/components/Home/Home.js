@@ -1,25 +1,14 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {requestAllStudents} from '../../ducks/reducer'
+import StudentContainer from './StudentContainer/StudentContainer'
 
 class Home extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            retrieved: false
-        }
-    }
     componentDidMount(){
-        this.getData()
-    }
-    getData(){
         this.props.requestAllStudents()
     }
-    
 
     render(){
-        console.log(this.props)
         const students = this.props.students
         return (
             <div>
@@ -30,11 +19,14 @@ class Home extends Component {
                 </form>
                 {/* Put default values in initial state */}
                 {students.map((student) => 
-                <Link to={`/student/${student.student_name}`} key={student.student_id}>
-                <div>{student.student_name}</div>
+                <StudentContainer
+                    key={student.student_id}
+                    id={student.student_id}
+                    name={student.student_name} 
+                    reminderInterval={student.reminder_interval}
+                />
                 
-                </Link>
-                ) }
+                )}
                 
 
 

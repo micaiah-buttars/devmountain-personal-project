@@ -12,7 +12,7 @@ class App extends Component {
         <Switch>
           <Route component={Home} path='/' exact/>
           <Route component={Login} path='/login'/>
-          <Route component={Student} path='/student/:name'/>
+          <Route component={Student} path='/student/:id'/>
         </Switch>
       </HashRouter>
 
