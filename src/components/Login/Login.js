@@ -10,7 +10,7 @@ export default class Login extends Component {
                 <form className='loginForm'>
                     <input type='text'/>
                     <input type='password'/>
-                    <button>Log In</button>
+                    <input type='submit' value='Log In'/>
                 </form>
                 <Link to='/'>Login</Link>
             </div>

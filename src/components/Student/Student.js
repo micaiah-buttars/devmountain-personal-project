@@ -9,7 +9,8 @@ class Student extends Component {
         this.state = {
             student_id: 0,
             student_name: '',
-            reminder_interval: 0
+            reminder_interval: 0,
+            selectedOption: ''
         }
     }
     componentDidMount(){
@@ -23,14 +24,53 @@ class Student extends Component {
             })
         })
     }
+    handleOptionChange = (e) => {
+        this.setState({
+            selectedOption: e.target.value
+        })
+    }
     
     render(){
 
         return (
             <div>
                 <h1>Student</h1>
+                <div className='behaviorReportContainer'>
+                    <form>
+                        <input type='radio' name='behavior' value='negative'
+                        checked={this.state.selectedOption === 'negative'}
+                        onChange={this.handleOptionChange}/>
+
+                        <input type='radio' name='behavior' value='positive'
+                        checked={this.state.selectedOption === 'positive'}
+                        onChange={this.handleOptionChange}/>
+                        
+                        {this.state.selectedOption === 'negative' ? (
+                            <select>
+                                <option value=''>Non-compliance</option>
+                                <option value=''>Eloping</option>
+                                <option value=''>Aggression</option>
+                                <option value=''>Inappropriate Verbal</option>
+                            </select>
+                            ) : (
+                            <select>
+                                <option value=''>Following Directions</option>
+                                <option value=''>Asking for a Break</option>
+                                <option value=''>Asking for Help</option>
+                                <option value=''>Earned Break</option>
+                            </select>
+                            )}
+                            
+
+
+                    </form>
+
+                </div>
+
+            <div>
                 <h3>{this.state.student_name}</h3>
                 <Link to='/'>Back</Link>
+            </div>
             </div>
         )
     }
