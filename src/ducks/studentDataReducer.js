@@ -5,7 +5,8 @@ const initialState = {
         {
         student_id: 0,
         student_name: '',
-        reminder_interval: 1
+        reminder_interval: 0
+
         }
     ]
 }

@@ -1,12 +1,13 @@
 import {createStore, applyMiddleware} from 'redux'
-// import {combineReducers} from 'redux'
+import {combineReducers} from 'redux'
 import promiseMiddleware from 'redux-promise-middleware'
-import reducer from './ducks/reducer'
+import studentDataReducer from './ducks/studentDataReducer'
+import editStudentReducer from './ducks/editStudentReducer'
 
-// const rootReducer = combineReducers({
-//     budget: budgetReducer,
-//     user: userReducer,
+const rootReducer = combineReducers({
+    studentData: studentDataReducer,
+    editStudent: editStudentReducer
 
-// })
+})
 
-export default createStore(reducer, applyMiddleware(promiseMiddleware))
+export default createStore(rootReducer, applyMiddleware(promiseMiddleware))

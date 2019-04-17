@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {requestStudent} from '../../ducks/reducer'
+import {requestStudent} from '../../ducks/studentDataReducer'
 
 class Student extends Component {
     constructor(props){
@@ -31,6 +31,7 @@ class Student extends Component {
     }
     
     render(){
+
 
         return (
             <div>
