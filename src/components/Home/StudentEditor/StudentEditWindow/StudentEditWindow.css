@@ -1,0 +1,30 @@
+.editWindow{
+    display: flex;
+    background-color: #DDD;
+    width: 80%;
+    height: 25em;
+    margin: 0 auto;
+    justify-content: center;
+
+}
+.behaviorCard{
+    height: 25em;
+
+    
+    
+
+}
+.behaviorInputs{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    height: 25em;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.buttonContainer{
+    display: flex;
+    width: 80vw;
+    justify-content: space-between;
+}

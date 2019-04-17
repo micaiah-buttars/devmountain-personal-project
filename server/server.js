@@ -31,3 +31,4 @@ app.post('/login')
 app.get('/students-data', students.viewAllStudents)
 app.get('/student-data/:id', students.viewStudent)
 
+app.post('/students-data', students.addStudent)

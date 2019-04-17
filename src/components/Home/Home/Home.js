@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {requestAllStudents} from '../../../ducks/studentDataReducer'
+import {addStudent} from '../../../ducks/editStudentReducer'
 import StudentEditWindow from '../StudentEditor/StudentEditWindow/StudentEditWindow'
 import StudentContainer from '../StudentContainer/StudentContainer'
 
@@ -15,15 +16,17 @@ class Home extends Component {
     componentDidMount(){
         this.props.requestAllStudents()
     }
+    addStudent = (body) => {
+        this.props.addStudent(body)
+    }
 
     render(){
-        const students = this.props.students
+        const students = this.props.studentData.students
         return (
             <div>
                 <h1>Home</h1>
                 <button>Add student</button>
-                {}
-                <StudentEditWindow />
+                <StudentEditWindow addStudent={this.addStudent}/>
 
                 {/* Put default values in initial state */}
                 {students.map((student) => 
@@ -43,11 +46,11 @@ class Home extends Component {
     }
 }
 
-function mapState(reduxState){
+const mapState = (reduxState) => {
     return {
-        studentData: state.studentData,
-        editStudent: state.editStudent
+        studentData: reduxState.studentData,
+        editStudent: reduxState.editStudent
     }
 
 }
-export default connect(mapState, {requestAllStudents})(Home)
+export default connect(mapState, {requestAllStudents, addStudent})(Home)

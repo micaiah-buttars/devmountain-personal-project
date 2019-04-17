@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import {connect} from 'react-redux'
 
 export default class DiscouragedCard extends Component {
   constructor(props) {
@@ -8,40 +7,52 @@ export default class DiscouragedCard extends Component {
       on_task_behavior: [this.props.on_task_behavior]
     };
   }
-  handleChange(key, value){
-    this.setState({
-      [key]: value
-    })
+//   handleChange(key, value){
+//     this.setState({
+//       [key]: value
+//     })
+//   }
+
+  handleClickNext = async () => {
+    await this.props.saveChanges(this.state)
+    this.props.nextCard()
+  }
+  handleClickPrev = async () => {
+    await this.props.saveChanges(this.state)
+    this.props.prevCard()
   }
 
   render() {
     console.log(this.props)
     return (
-      <div className="discouragedCard">
+        <div className="behaviorCard">
+        <span>Discouraged Behaviors</span>
         <div>
+        <div className='behaviorInputs'>
           <label>
             Discouraged Behavior
+            <br/>
             <input
             
               type='text'/>
           </label>
           <label>
             Description
+            <br/>
             <input
             
               type='text'/>
           </label>
 
         </div>
-        <button onClick={this.props.prevCard}>Prev</button>
-        <button onClick={this.props.nextCard}>Next</button>
+        <div className='buttonContainer'>
+        <button onClick={this.handleClickPrev}>Prev</button>
+
+        <button onClick={this.handleClickNext}>Next</button>
+        </div>
+        </div>
+
       </div>
     );
   }
 }
-
-// const mapState = (reduxState) => {
-//     return reduxState
-// }
-
-// export default connect(mapState, {requestStudent})(NameCard)

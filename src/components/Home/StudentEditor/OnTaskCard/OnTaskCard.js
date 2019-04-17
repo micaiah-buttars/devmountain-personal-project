@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import {connect} from 'react-redux'
 
 export default class OnTaskCard extends Component {
   constructor(props) {
@@ -30,10 +29,12 @@ export default class OnTaskCard extends Component {
 
   render() {
     return (
-      <div className="onTaskCard">
-        <div>
+      <div className="behaviorCard">
+      <div>
+      <div className='behaviorInputs'>
           <label>
             On Task Behavior
+            <br/>
             <input
                 value={this.state.on_task}
                 onChange={e => this.handleChangeTask(e.target.value)}
@@ -41,6 +42,7 @@ export default class OnTaskCard extends Component {
           </label>
           <label>
             Description
+            <br/>
             <input
                 value={this.state.on_task_desc}
                 onChange={e => this.handleChangeTaskDesc(e.target.value)}
@@ -48,15 +50,14 @@ export default class OnTaskCard extends Component {
           </label>
 
         </div>
+        <div className='buttonContainer'>
         <button onClick={this.handleClickPrev}>Prev</button>
         <button onClick={this.handleClickNext}>Next</button>
+        </div>
+      </div>
+
+
       </div>
     );
   }
 }
-
-// const mapState = (reduxState) => {
-//     return reduxState
-// }
-
-// export default connect(mapState, {requestStudent})(NameCard)
