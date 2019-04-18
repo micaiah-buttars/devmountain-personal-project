@@ -10,7 +10,7 @@
 
 
 }
-input[type=text], input[type=password] {
+.loginInput {
     padding: 1.1em;
     padding-left: 2em;
     margin: 1em;

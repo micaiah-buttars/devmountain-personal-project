@@ -1,0 +1,23 @@
+.behaviorInput{
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+
+}
+.behaviorName{
+    border-radius: 2em;
+    padding-left: 1em;
+    height: 3em;
+    width: 20em;
+    margin-bottom: -1em;
+
+
+}
+.behaviorDesc{
+    resize: none;
+    border: none;
+    border-radius: 1em;
+    padding: 1em;
+    width: 30em;
+    height: 5em;
+}

@@ -5,21 +5,12 @@ export default class NameCard extends Component {
     super(props);
     this.state = {
       student_name: '',
-      reminder_interval: null
+      reminder_interval: ''
     };
   }
-  handleChangeName = (value) => {
-    this.setState({
-      student_name: value
-    })
-  }
-  handleChangeInterval = (value) => {
-    this.setState({
-      reminder_interval: value
-    })
-  }
-  handleClickNext = async () => {
-    await this.props.saveChanges(this.state)
+
+
+  handleClickNext = () => {
     this.props.nextCard()
   }
 
@@ -33,8 +24,9 @@ export default class NameCard extends Component {
             Student's Name
             <br/>
             <input
-              value={`${this.state.student_name}`}
-              onChange={e => this.handleChangeName(e.target.value)}
+              name='student_name'
+              value={this.props.student_name || ''}
+              onChange={this.props.handleChange}
               type='text'/>
           </label>
 
@@ -42,9 +34,10 @@ export default class NameCard extends Component {
             Reminder Interval
             <br/>
             <select
+              name='reminder_interval'
               value={this.props.reminder_interval}
-              onChange={e => this.handleChangeInterval(e.target.value)}>
-              <option value='0'>--Select--</option>
+              onChange={this.props.handleChange}>
+              <option value=''>--Select--</option>
               <option value='1'>5</option>
               <option value='2'>10</option>
               <option value='3'>15</option>

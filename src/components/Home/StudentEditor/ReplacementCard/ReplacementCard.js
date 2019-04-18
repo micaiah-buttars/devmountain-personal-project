@@ -7,17 +7,11 @@ export default class ReplacementCard extends Component {
       on_task_behavior: [this.props.on_task_behavior]
     };
   }
-//   handleChange(key, value){
-//     this.setState({
-//       [key]: value
-//     })
-//   }
-handleClickNext = async () => {
-    await this.props.saveChanges(this.state)
+
+handleClickNext = () => {
     this.props.nextCard()
   }
-  handleClickPrev = async () => {
-    await this.props.saveChanges(this.state)
+  handleClickPrev = () => {
     this.props.prevCard()
   }
 
