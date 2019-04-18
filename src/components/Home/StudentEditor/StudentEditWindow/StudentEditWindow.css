@@ -2,20 +2,44 @@
     display: flex;
     background-color: #DDD;
     width: 80%;
-    height: 25em;
     margin: 0 auto;
     justify-content: center;
+    flex-direction: row
 
 }
 .behaviorCard{
-    height: 25em;
+    display: flex;
+    max-height: 25em;
+    margin-bottom: 1em
 
     
     
 
 }
+.inputsContainer{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    max-height: 25em;
+    justify-content: space-around;
+}
 .cardTitle{
+    display: flex;
+    justify-content: center;
+
+    border-radius: 3em;
+
+}
+.title{
     text-align: center;
+    color: white;
+    background-color: #777;
+    border-radius: 5em;
+    padding: .5em 4em;
+    margin-top: -3em;
+    margin-bottom: 1em
+
+
 }
 
 .buttonContainer{

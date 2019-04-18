@@ -26,28 +26,6 @@ export default class StudentEditWindow extends Component {
 
         })
     }
-    addBehavior = (state) => {
-        const {behavior_name, behavior_desc} = state
-
-        this.state.behaviors.push({
-            behavior_name,
-            behavior_desc
-        })
-        console.log(this.state)
-        return this.state
-        // this.setState({
-        //     behaviors: [
-        //         ...this.state.behaviors,
-        //         {
-        //             behavior_name,
-        //             behavior_desc
-
-        //         }
-
-        //     ]
-        // })
-
-    }
 
     addStudent = () => {
         const {student_id, student_name, reminder_interval} = this.state
@@ -121,3 +99,4 @@ export default class StudentEditWindow extends Component {
         
     }
 }
+

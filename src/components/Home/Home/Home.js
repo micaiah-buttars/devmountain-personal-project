@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {requestAllStudents} from '../../../ducks/studentDataReducer'
-import {addStudent} from '../../../ducks/editStudentReducer'
+// import {addStudent} from '../../../ducks/editStudentReducer'
 import StudentEditWindow from '../StudentEditor/StudentEditWindow/StudentEditWindow'
 import StudentContainer from '../StudentContainer/StudentContainer'
+import Nav from '../../shared/Nav/Nav'
 
 class Home extends Component {
     constructor(){
@@ -16,19 +17,15 @@ class Home extends Component {
     componentDidMount(){
         this.props.requestAllStudents()
     }
-    addStudent = (body) => {
-        this.props.addStudent(body)
-    }
 
     render(){
         const students = this.props.studentData.students
         return (
             <div>
-                <h1>Home</h1>
+                <Nav />
                 <button>Add student</button>
                 <StudentEditWindow addStudent={this.addStudent}/>
 
-                {/* Put default values in initial state */}
                 {students.map((student) => 
                 <StudentContainer
                     key={student.student_id}
@@ -36,7 +33,6 @@ class Home extends Component {
                     name={student.student_name} 
                     reminderInterval={student.reminder_interval}
                 />
-                
                 )}
                 
 
@@ -53,4 +49,4 @@ const mapState = (reduxState) => {
     }
 
 }
-export default connect(mapState, {requestAllStudents, addStudent})(Home)
+export default connect(mapState, {requestAllStudents})(Home)

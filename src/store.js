@@ -3,6 +3,7 @@ import {combineReducers} from 'redux'
 import promiseMiddleware from 'redux-promise-middleware'
 import studentDataReducer from './ducks/studentDataReducer'
 import editStudentReducer from './ducks/editStudentReducer'
+import {composeWithDevTools} from 'redux-devtools-extension'
 
 const rootReducer = combineReducers({
     studentData: studentDataReducer,
@@ -10,4 +11,4 @@ const rootReducer = combineReducers({
 
 })
 
-export default createStore(rootReducer, applyMiddleware(promiseMiddleware))
+export default createStore(rootReducer, composeWithDevTools(applyMiddleware(promiseMiddleware)))

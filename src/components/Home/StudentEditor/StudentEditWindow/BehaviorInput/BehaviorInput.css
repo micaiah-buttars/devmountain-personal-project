@@ -18,6 +18,16 @@
     border: none;
     border-radius: 1em;
     padding: 1em;
-    width: 30em;
+    width: 90%;
     height: 5em;
+}
+.submit{
+    position: absolute;
+    height: 7em;
+    border: none;
+    border-top-right-radius: 1em;
+    border-bottom-right-radius: 1em;
+    margin-left: -2em;
+    background-color: aquamarine
+
 }
