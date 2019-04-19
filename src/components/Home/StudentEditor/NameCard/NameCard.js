@@ -25,7 +25,7 @@ export default class NameCard extends Component {
             <br/>
             <input
               name='student_name'
-              value={this.props.student_name || ''}
+              value={this.props.student.student_name}
               onChange={this.props.handleChange}
               type='text'/>
           </label>
@@ -35,7 +35,7 @@ export default class NameCard extends Component {
             <br/>
             <select
               name='reminder_interval'
-              value={this.props.reminder_interval}
+              value={this.props.student.reminder_interval}
               onChange={this.props.handleChange}>
               <option value=''>--Select--</option>
               <option value='1'>5</option>

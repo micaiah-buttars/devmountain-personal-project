@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {requestAllStudents} from '../../../ducks/studentDataReducer'
-// import {addStudent} from '../../../ducks/editStudentReducer'
 import StudentEditWindow from '../StudentEditor/StudentEditWindow/StudentEditWindow'
 import StudentContainer from '../StudentContainer/StudentContainer'
 import Nav from '../../shared/Nav/Nav'
@@ -10,7 +9,8 @@ class Home extends Component {
     constructor(){
         super()
         this.state={
-            editIsVisible: false
+ 
+           
         }
 
     }
@@ -18,20 +18,62 @@ class Home extends Component {
         this.props.requestAllStudents()
     }
 
+    handleChange = (e) => {
+        const {name, value} = e.target
+        this.setState({
+            student: {
+                ...this.state.student,
+                [name]: value || ''
+            }
+
+
+        })
+    }
+
+    invokeEditor = async (student) => {
+        const {student_id, student_name, reminder_interval} = student
+        await this.setState({
+            editIsVisible: true,
+            student: {
+                student_id,
+                student_name,
+                reminder_interval
+            }
+
+        })
+        console.log(this.state)
+
+    } 
+
+    
+
     render(){
+        const {editIsVisible, student} = this.state
+        const modal = <StudentEditWindow
+                student={this.state.student}
+                addStudent={this.addStudent}
+                handleChange={this.handleChange}/>
+
+
+        
         const students = this.props.studentData.students
         return (
             <div>
-                <Nav />
-                <button>Add student</button>
-                <StudentEditWindow addStudent={this.addStudent}/>
+                <nav>
+                    <Nav />
+                    <button>Add student</button>
+                </nav>
+
+                {this.state.editIsVisible && modal}
+
 
                 {students.map((student) => 
                 <StudentContainer
                     key={student.student_id}
-                    id={student.student_id}
-                    name={student.student_name} 
-                    reminderInterval={student.reminder_interval}
+                    student_id={student.student_id}
+                    student_name={student.student_name} 
+                    reminder_interval={student.reminder_interval}
+                    invokeEditor={this.invokeEditor}
                 />
                 )}
                 

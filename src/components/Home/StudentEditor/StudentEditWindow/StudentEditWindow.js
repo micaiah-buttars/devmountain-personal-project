@@ -3,19 +3,41 @@ import NameCard from '../NameCard/NameCard'
 import OnTaskCard from '../OnTaskCard/OnTaskCard'
 import DiscouragedCard from '../DiscouragedCard/DiscouragedCard'
 import ReplacementCard from '../ReplacementCard/ReplacementCard'
+
+import {connect} from 'react-redux'
+import {addStudent} from '../../../../ducks/editStudentReducer'
+
 import './StudentEditWindow.css'
 
-export default class StudentEditWindow extends Component {
+class StudentEditWindow extends Component {
     constructor(props){
         super(props)
+        const {student_id, student_name, reminder_interval} = this.props.student
         this.state = {
-            currentIndex: 1,
-            student_id: 0,
-            student_name: '',
-            reminder_interval: '',
+            currentIndex: 0,
+            student: {
+                student_id,
+                student_name,
+                reminder_interval
+            },
             behavior_name: '',
             behavior_desc: '',
             behaviors: []
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if(this.props.student !== prevProps.student){
+            const {student_id, student_name, reminder_interval} = this.props.student
+            this.setState(
+                {
+                    student: {
+                        student_id,
+                        student_name,
+                        reminder_interval
+                    }
+                }
+            )
         }
     }
 
@@ -28,7 +50,7 @@ export default class StudentEditWindow extends Component {
     }
 
     addStudent = () => {
-        const {student_id, student_name, reminder_interval} = this.state
+        const {student_id, student_name, reminder_interval} = this.state.student
 
         this.props.addStudent({student_id, student_name, reminder_interval})
     }
@@ -56,7 +78,9 @@ export default class StudentEditWindow extends Component {
 
     }
     render(){
-        console.log(this.state)
+        console.log('PROPS', this.props)
+        console.log('STATE', this.state)
+        console.log('STUDENT NAME', this.state.student.student_name)
         let {currentIndex} = this.state
         return (
             <div className='editWindow'>
@@ -64,11 +88,9 @@ export default class StudentEditWindow extends Component {
                     switch(currentIndex){
                         case 0:
                             return <NameCard
-                                student_id={this.state.student_id}
-                                student_name={this.state.student_name}
-                                reminder_interval={this.state.reminder_interval}
+                                student={this.state.student}
                                 addStudent={this.addStudent}
-                                handleChange={this.handleChange}
+                                handleChange={this.props.handleChange}
                                 nextCard={this.nextCard}/>
                                 
                         case 1:
@@ -99,4 +121,13 @@ export default class StudentEditWindow extends Component {
         
     }
 }
+
+const mapState = (reduxState) => {
+    return {
+        studentData: reduxState.studentData,
+        editStudent: reduxState.editStudent
+    }
+
+}
+export default connect(mapState, {addStudent})(StudentEditWindow)
 
