@@ -4,8 +4,8 @@ const initialState = {
     editIsVisible: false,
     student: {
         student_id: 0,
-        student_name: null,
-        reminder_interval: null
+        student_name: '',
+        reminder_interval: 0
     },
     behaviors: [{
         behavior_name: 'On task',
@@ -15,50 +15,57 @@ const initialState = {
     ]
 }
 
+
 const ADD_STUDENT = 'ADD_STUDENT'
 const ADD_BEHAVIOR = 'ADD_BEHAVIOR'
 const TOGGLE_EDITOR = 'TOGGLE_EDITOR'
 const EDIT_STUDENT = 'EDIT_STUDENT'
+const SYNC_STUDENT_INFO = 'SYNC_STUDENT_INFO'
 
-export const addStudent = (body) => {
-    let data = axios.post('/students-data', body).then(res => res.data)
+export const addStudent = (student_id, student_name, reminder_interval) => {
+    const student = {
+        student_id,
+        student_name,
+        reminder_interval,
+    }
+
+    let data = axios.post('/students-data', student).then(res => res.data)
         return {
             type: ADD_STUDENT,
-            payload: data
+            payload: data[0]
         }
 }
+
 export const addBehavior = (behavior) => {
         return {
             type: ADD_BEHAVIOR,
             payload: behavior
         }
 }
+
 export const toggleEditor = () => {
     return {
         type: TOGGLE_EDITOR,
     }
 }
 
-export const editStudent = (e) => {
-    const {name, value} = e.target
+export const updateStudent = (obj) => {
+    const {name, value} = obj
     const student = {
-            ...this.state.student,
             [name]: value || ''
         }
-        
-        
-    
     return {
+        type: EDIT_STUDENT,
+        payload: student
+    } 
+}
 
-    }
-    this.setState({
-        student: {
-            ...this.state.student,
-            [name]: value || ''
-        }
+export const syncStudentInfo = (student) => {
+    return {
+        type: SYNC_STUDENT_INFO,
+        payload: student
 
-
-    })}
+    } 
 }
 
 
@@ -69,7 +76,11 @@ export default function(state = initialState, action){
         case ADD_BEHAVIOR:
                 return {...state, behaviors: [...state.behaviors, action.payload]}
         case TOGGLE_EDITOR:
-            return {...state, editIsVisible: !this.state.editIsVisible}
+            return {...state, editIsVisible: !state.editIsVisible}
+        case EDIT_STUDENT:
+            return {...state, student: {...state.student, ...action.payload}}
+        case SYNC_STUDENT_INFO:
+            return {...state, student: {...action.payload}}
         default:
             return state
     }

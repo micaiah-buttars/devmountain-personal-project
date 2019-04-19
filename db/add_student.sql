@@ -5,4 +5,4 @@ insert into student(
     $1,
     $2
 )
-returning student_id
+returning *

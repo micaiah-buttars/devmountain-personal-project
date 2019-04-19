@@ -2,6 +2,10 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {requestStudent} from '../../ducks/studentDataReducer'
+import {toggleEditor, addStudent, updateStudent} from '../../ducks/editStudentReducer'
+import StudentEditWindow from '../shared/StudentEditor/StudentEditWindow/StudentEditWindow'
+
+import Nav from '../shared/Nav/Nav'
 
 class Student extends Component {
     constructor(props){
@@ -31,11 +35,27 @@ class Student extends Component {
     }
     
     render(){
+        console.log(this.props)
+        const {student_id, student_name, reminder_interval} = this.props.studentData.students[0]
+        const student = {
+            student_id,
+            student_name,
+            reminder_interval
+        }
+        const modal = <StudentEditWindow
+                student={student}
+                addStudent={this.addStudent}
+                handleChange={this.handleChange}/>
 
 
         return (
             <div>
-                <h1>Student</h1>
+                <Nav />
+                {this.props.editStudent.editIsVisible && modal}
+
+                <h3>{this.state.student_name}</h3>
+
+
                 <div className='behaviorReportContainer'>
                     <form>
                         <input type='radio' name='behavior' value='negative'
@@ -69,7 +89,7 @@ class Student extends Component {
                 </div>
 
             <div>
-                <h3>{this.state.student_name}</h3>
+
                 <Link to='/'>Back</Link>
             </div>
             </div>

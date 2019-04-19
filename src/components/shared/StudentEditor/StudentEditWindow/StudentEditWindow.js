@@ -5,14 +5,13 @@ import DiscouragedCard from '../DiscouragedCard/DiscouragedCard'
 import ReplacementCard from '../ReplacementCard/ReplacementCard'
 
 import {connect} from 'react-redux'
-import {addStudent} from '../../../../ducks/editStudentReducer'
 
 import './StudentEditWindow.css'
 
 class StudentEditWindow extends Component {
     constructor(props){
         super(props)
-        const {student_id, student_name, reminder_interval} = this.props.student
+        const {student_id, student_name, reminder_interval} = this.props.editStudent.student
         this.state = {
             currentIndex: 0,
             student: {
@@ -26,21 +25,6 @@ class StudentEditWindow extends Component {
         }
     }
 
-    componentDidUpdate(prevProps) {
-        if(this.props.student !== prevProps.student){
-            const {student_id, student_name, reminder_interval} = this.props.student
-            this.setState(
-                {
-                    student: {
-                        student_id,
-                        student_name,
-                        reminder_interval
-                    }
-                }
-            )
-        }
-    }
-
     handleChange = (e) => {
         const {name, value} = e.target
         this.setState({
@@ -49,11 +33,6 @@ class StudentEditWindow extends Component {
         })
     }
 
-    addStudent = () => {
-        const {student_id, student_name, reminder_interval} = this.state.student
-
-        this.props.addStudent({student_id, student_name, reminder_interval})
-    }
 
 
 
@@ -78,21 +57,13 @@ class StudentEditWindow extends Component {
 
     }
     render(){
-        console.log('PROPS', this.props)
-        console.log('STATE', this.state)
-        console.log('STUDENT NAME', this.state.student.student_name)
         let {currentIndex} = this.state
         return (
             <div className='editWindow'>
                 {(() => {
                     switch(currentIndex){
                         case 0:
-                            return <NameCard
-                                student={this.state.student}
-                                addStudent={this.addStudent}
-                                handleChange={this.props.handleChange}
-                                nextCard={this.nextCard}/>
-                                
+                            return <NameCard />       
                         case 1:
                             return <OnTaskCard
                                 addBehavior={this.addBehavior}
@@ -129,5 +100,5 @@ const mapState = (reduxState) => {
     }
 
 }
-export default connect(mapState, {addStudent})(StudentEditWindow)
+export default connect(mapState)(StudentEditWindow)
 

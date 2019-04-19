@@ -24,7 +24,6 @@ class BehaviorInput extends Component {
   
 
   render(){
-      console.log(this.state)
       return(
           <div>
             <form className='behaviorInput'>

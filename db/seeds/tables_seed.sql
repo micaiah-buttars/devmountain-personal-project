@@ -8,12 +8,12 @@ insert into reminder_interval ( reminder_interval)
 values (5),(10),(15),(30),(60);
 
 
--- create table behavior_value (
---     behavior_value_id serial primary key,
---     behavior_value varchar(10)
--- );
--- insert into behavior_value (behavior_value)
--- values ('positive'),('negative');
+create table behavior_value (
+    behavior_value_id serial primary key,
+    behavior_value varchar(20)
+);
+insert into behavior_value (behavior_value)
+values ('On Task'),('Discouraged'),('Replacement');
 
 
 
