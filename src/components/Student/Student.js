@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {requestStudent} from '../../ducks/studentDataReducer'
-import {toggleEditor, addStudent, updateStudent} from '../../ducks/editStudentReducer'
+// import {toggleEditor, addStudent, updateStudent} from '../../ducks/editStudentReducer'
 import StudentEditWindow from '../shared/StudentEditor/StudentEditWindow/StudentEditWindow'
 
 import Nav from '../shared/Nav/Nav'

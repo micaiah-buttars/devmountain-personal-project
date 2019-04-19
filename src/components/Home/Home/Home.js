@@ -7,45 +7,12 @@ import StudentContainer from '../StudentContainer/StudentContainer'
 import Nav from '../../shared/Nav/Nav'
 
 class Home extends Component {
-    constructor(props){
-        super(props)
-        this.state={
-        }
 
-    }
     componentDidMount(){
         this.props.requestAllStudents()
     }
-    // componentDidUpdate(prevProps) {
-    //     if(this.props.editStudent.editIsVisible !== prevProps.editStudent.editIsVisible){
-    //         const {editIsVisible} = this.props.editStudent
-    //         this.setState(
-    //             {
-    //                 editIsVisible
-    //             }
-    //         )
-    //     }
-    // }
-
-    // handleChange = (e) => {
-    //     const {name, value} = e.target
-    //     this.setState({
-    //         student: {
-    //             ...this.state.student,
-    //             [name]: value || ''
-    //         }
-
-
-    //     })
-    // }
-
-
-
-    
 
     render(){
-        console.log(this.props)
-        const {editIsVisible, student} = this.props
         const modal = <StudentEditWindow
                 student={this.props.student}
                 addStudent={this.addStudent}

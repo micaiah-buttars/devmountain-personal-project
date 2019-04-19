@@ -3,27 +3,6 @@ import {connect} from 'react-redux'
 import {toggleEditor} from '../../../ducks/editStudentReducer'
 
 class Nav extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      inputs: ['']
-    };
-  }
-
-  invokeEditor = async (student) => {
-    const {student_id, student_name, reminder_interval} = student
-    await this.setState({
-        editIsVisible: true,
-        student: {
-            student_id,
-            student_name,
-            reminder_interval
-        }
-
-    })
-    console.log(this.state)
-
-} 
 
   render() {
     console.log(this.props)

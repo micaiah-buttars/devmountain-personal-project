@@ -3,15 +3,6 @@ import {connect} from 'react-redux'
 import {updateStudent, addStudent, toggleEditor} from '../../../../ducks/editStudentReducer'
 
 class NameCard extends Component {
-  constructor(props) {
-    super(props);
-    // this.state = {
-    //   student_name: '',
-    //   reminder_interval: ''
-    // };
-  }
-
-
   handleClickNext = () => {
     this.props.nextCard()
   }
@@ -34,7 +25,7 @@ class NameCard extends Component {
 
 
   render() {
-    const {student_id, student_name, reminder_interval} = this.props.editStudent.student
+    const {student_name, reminder_interval} = this.props.editStudent.student
     return (
       <div className="nameCard">
       <div>
