@@ -21,6 +21,7 @@ const ADD_BEHAVIOR = 'ADD_BEHAVIOR'
 const TOGGLE_EDITOR = 'TOGGLE_EDITOR'
 const EDIT_STUDENT = 'EDIT_STUDENT'
 const SYNC_STUDENT_INFO = 'SYNC_STUDENT_INFO'
+const UNSYNC_STUDENT_INFO = 'UNSYNC_STUDENT_INFO'
 
 export const addStudent = (student_id, student_name, reminder_interval) => {
     const student = {
@@ -67,6 +68,11 @@ export const syncStudentInfo = (student) => {
 
     } 
 }
+export const unsyncStudentInfo = () => {
+    return {
+        type: UNSYNC_STUDENT_INFO
+    }
+}
 
 
 export default function(state = initialState, action){
@@ -81,6 +87,8 @@ export default function(state = initialState, action){
             return {...state, student: {...state.student, ...action.payload}}
         case SYNC_STUDENT_INFO:
             return {...state, student: {...action.payload}}
+        case UNSYNC_STUDENT_INFO:
+            return {...state, ...initialState}
         default:
             return state
     }

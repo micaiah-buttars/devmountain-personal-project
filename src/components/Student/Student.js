@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {requestStudent} from '../../ducks/studentDataReducer'
-// import {toggleEditor, addStudent, updateStudent} from '../../ducks/editStudentReducer'
+import {unsyncStudentInfo} from '../../ducks/editStudentReducer'
 import StudentEditWindow from '../shared/StudentEditor/StudentEditWindow/StudentEditWindow'
 
 import Nav from '../shared/Nav/Nav'
@@ -90,7 +90,7 @@ class Student extends Component {
 
             <div>
 
-                <Link to='/'>Back</Link>
+                <Link to='/' onClick={this.props.unsyncStudentInfo}>Back</Link>
             </div>
             </div>
         )
@@ -102,4 +102,4 @@ const mapState = (reduxState) => {
     return reduxState
 }
 
-export default connect(mapState, {requestStudent})(Student)
+export default connect(mapState, {requestStudent, unsyncStudentInfo})(Student)
