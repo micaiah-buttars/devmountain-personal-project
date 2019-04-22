@@ -19,8 +19,6 @@ class StudentEditWindow extends Component {
                 student_name,
                 reminder_interval
             },
-            behavior_name: '',
-            behavior_desc: '',
             behaviors: []
         }
     }
@@ -63,7 +61,7 @@ class StudentEditWindow extends Component {
                 {(() => {
                     switch(currentIndex){
                         case 0:
-                            return <NameCard />       
+                            return <NameCard student={this.props.student}/>       
                         case 1:
                             return <OnTaskCard
                                 addBehavior={this.addBehavior}

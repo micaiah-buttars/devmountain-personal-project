@@ -10,7 +10,6 @@ class Home extends Component {
 
     componentDidMount(){
         this.props.requestAllStudents()
-        this.props.unsyncStudentInfo()
     }
 
     render(){

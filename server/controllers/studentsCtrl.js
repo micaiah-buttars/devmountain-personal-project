@@ -53,6 +53,25 @@ module.exports = {
                     res.status(200).send(student)
                 }).catch(err => console.log('error', err))
         }
-    } 
+    },
+    getTimeSlots: (req, res) => {
+        const db = req.app.get('db')
+
+        db.get_time_slots()
+        .then(times => {
+            res.status(200).send(times)
+        })
+
+    },
+    addLog: (req, res) => {
+        const db = req.app.get('db')
+        const {student_id, behavior_id, teacher_id, time_slot_id, log_comment, log_date} = req.body
+
+        db.add_log([student_id, behavior_id, teacher_id, time_slot_id, log_comment, log_date])
+        .then(log => {
+            res.status(200).send(log)
+        })
+
+    }
 
 }

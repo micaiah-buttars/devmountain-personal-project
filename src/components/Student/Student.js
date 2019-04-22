@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {requestStudent} from '../../ducks/studentDataReducer'
-import {unsyncStudentInfo} from '../../ducks/editStudentReducer'
+// import {unsyncStudentInfo} from '../../ducks/editStudentReducer'
+import {getTimeSlots} from '../../ducks/timeSlotReducer'
+import {updateLog, addLog} from '../../ducks/logReducer'
 import StudentEditWindow from '../shared/StudentEditor/StudentEditWindow/StudentEditWindow'
 
 import Nav from '../shared/Nav/Nav'
@@ -11,33 +12,31 @@ class Student extends Component {
     constructor(props){
         super(props)
         this.state = {
-            student_id: 0,
-            student_name: '',
-            reminder_interval: 0,
             behaviors: [''],
             selectedOption: 'on task'
         }
     }
     componentDidMount(){
         const id = this.props.match.params.id
-        this.props.requestStudent(id).then(res => {
-            const {student_id, student_name, reminder_interval, behaviors} = res.value[0]
-            this.setState({
-                student_id,
-                student_name,
-                reminder_interval,
-                behaviors
-            })
-        })
+        this.props.requestStudent(id)
+        this.props.getTimeSlots()
     }
     handleOptionChange = (e) => {
         this.setState({
             selectedOption: e.target.value
         })
     }
+    handleChange = (e) => {
+        const {name, value} = e.target
+        this.props.updateLog({name, value})
+    }
+    handleSubmit = () => {
+        this.props.addLog(this.state.student_id)
+    }
     
     render(){
         console.log('PROPS', this.props)
+        console.log('STATE', this.state)
         const {student_id, student_name, reminder_interval, behaviors} = this.props.studentData.students[0]
         const student = {
             student_id,
@@ -47,25 +46,39 @@ class Student extends Component {
         }
         const modal = <StudentEditWindow
                 student={student}
-                addStudent={this.addStudent}
-                handleChange={this.handleChange}/>
+                // addStudent={this.addStudent}
+                // handleChange={this.handleChange}
+                />
 
-        const discouraged = (student.behaviors = this.state.behaviors)
+        const discouraged = (behaviors)
             .filter(behavior => behavior.behavior_type_id === 2)
             .map((behavior, i) => {
-                return <option key={i}>{behavior.behavior_name}</option>
+                return <option
+                    key={i}
+                    value={behavior.behavior_id}
+                    onChange={this.handleChange}>{behavior.behavior_name}</option>
             })
-        const replacement = (student.behaviors = this.state.behaviors)
+        const replacement = (behaviors)
             .filter(behavior => behavior.behavior_type_id === 3)
             .map((behavior, i) => {
-                return <option key={i}>{behavior.behavior_name}</option>
+                return <option
+                    key={i}
+                    value={behavior.behavior_id}
+                    onChange={this.handleChange}>{behavior.behavior_name}</option>
             })
+
+        const times = (this.props.time.time_slots.map((time, i) => {
+            return <option
+                key={i}
+                value={time.time_slot_id}
+                >{time.time_value}</option>
+        }))
 
 
         return (
             <div>
                 <Nav pageTitle={
-                    (this.state.student_name) ? (`${this.state.student_name}'s Page`) : ('')
+                    (student_name) ? (`${student_name}'s Page`) : ('')
                     }/>
 
                 {this.props.editStudent.editIsVisible && modal}
@@ -99,16 +112,35 @@ class Student extends Component {
                         </label>
 
                         {this.state.selectedOption === 'discouraged' ? (
-                            <select>
+                            <select
+                                name='behavior_id'
+                                onChange={this.handleChange}>
                                 {discouraged}
                             </select>
                             ) : this.state.selectedOption === 'replacement' ? (
-                            <select>
+                            <select
+                                name='behavior_id'
+                                onChange={this.handleChange}>
                                 {replacement}
                             </select>
                             ) : <div></div>}
 
-                        <input type='text' placeholder='comments'/>
+                        <input
+                            type='text'
+                            placeholder='comments'
+                            name='log_comment'
+                            value={this.props.log.log_comment}
+                            onChange={this.handleChange}
+                            
+                            />
+
+                        <select
+                            name='time_slot_id'
+                            onChange={this.handleChange}>
+                            {times}
+                        </select>
+
+                        <button onClick={this.handleSubmit}>Send Log</button>
                             
 
 
@@ -125,4 +157,4 @@ const mapState = (reduxState) => {
     return reduxState
 }
 
-export default connect(mapState, {requestStudent, unsyncStudentInfo})(Student)
+export default connect(mapState, {requestStudent, getTimeSlots, updateLog, addLog})(Student)
