@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {requestAllStudents} from '../../../ducks/studentDataReducer'
-import {syncStudentInfo} from '../../../ducks/editStudentReducer'
+import {syncStudentInfo, unsyncStudentInfo} from '../../../ducks/editStudentReducer'
 import StudentEditWindow from '../../shared/StudentEditor/StudentEditWindow/StudentEditWindow'
 import StudentContainer from '../StudentContainer/StudentContainer'
 import Nav from '../../shared/Nav/Nav'
@@ -10,6 +10,7 @@ class Home extends Component {
 
     componentDidMount(){
         this.props.requestAllStudents()
+        this.props.unsyncStudentInfo()
     }
 
     render(){
@@ -24,7 +25,7 @@ class Home extends Component {
         return (
             <div>
                 <nav>
-                    <Nav />
+                    <Nav pageTitle='Dashboard'/>
                 </nav>
 
                 {this.props.editStudent.editIsVisible && modal}
@@ -54,4 +55,4 @@ const mapState = (reduxState) => {
     }
 
 }
-export default connect(mapState, {requestAllStudents, syncStudentInfo})(Home)
+export default connect(mapState, {requestAllStudents, syncStudentInfo, unsyncStudentInfo})(Home)

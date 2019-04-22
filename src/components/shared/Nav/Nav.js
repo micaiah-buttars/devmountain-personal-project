@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {connect} from 'react-redux'
 import {toggleEditor} from '../../../ducks/editStudentReducer'
+import './Nav.css'
 
 class Nav extends Component {
 
@@ -8,14 +9,14 @@ class Nav extends Component {
     console.log(this.props)
     return (
       <div className="navBarContainer">
-        <div className='teacherName'>
+        <div className='location'>
+          <h2>{this.props.pageTitle}</h2>
+        </div>
+
+        <div className='userActions'>
         <span>Logged in as {'Jen'}</span>
-        </div>
-        <div className='location'> 
-
-
-        </div>
         <button onClick={this.props.toggleEditor}>|||</button>
+        </div>
 
       </div>
     );

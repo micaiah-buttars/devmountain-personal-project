@@ -5,8 +5,11 @@ const initialState = {
         {
         student_id: 0,
         student_name: '',
-        reminder_interval: 0
-
+        reminder_interval: 0,
+        behaviors: [{
+            behavior_name: '',
+            behavior_desc: ''
+          }]
         }
     ]
 }
@@ -32,9 +35,9 @@ export const requestStudent = (params) => {
 export default function(state = initialState, action){
     switch(action.type){
         case REQUEST_ALL_STUDENTS + '_FULFILLED':
-            return {students: action.payload}
+            return {...state, students: action.payload}
         case REQUEST_STUDENT + '_FULFILLED':
-                return {students: action.payload}
+                return {...state, students: action.payload}
         default:
             return state
     }

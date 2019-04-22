@@ -29,15 +29,19 @@ class NameCard extends Component {
     return (
       <div className="nameCard">
       <div>
-      <div>
-            <input
+      <div className='addContainer'>
+        <div className='nameContainer'>
+        <input
+              className='studentName'
               name='student_name'
               value={student_name}
               onChange={this.handleChange}
-              type='text'/>
+              type='text'
+              placeholder={`Student's Name`}/>
 
 
             <select
+              className='reminderInterval'
               name='reminder_interval'
               value={reminder_interval}
               onChange={this.handleChange}>
@@ -48,15 +52,14 @@ class NameCard extends Component {
               <option value='4'>30</option>
               <option value='5'>60</option>
             </select>
-
-          <button
-            onClick={this.handleSubmit}>Submit</button>
-
         </div>
-        <div className='buttonContainer'>
-        <button onClick={this.props.toggleEditor}>Close</button>
+
         </div>
       </div>
+        <div className='buttonContainer'>
+          <button onClick={this.props.toggleEditor}>Cancel</button>
+          <button onClick={this.handleSubmit}>Submit</button>
+        </div>
 
         
       </div>

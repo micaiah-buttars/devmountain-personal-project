@@ -4,7 +4,3 @@ body{
 input[type=text], [type=password]{
   border: none
 }
-.navBarContainer{
-  height: 3em;
-  background-color: #DDD;
-}

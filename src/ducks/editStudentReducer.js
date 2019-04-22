@@ -7,12 +7,6 @@ const initialState = {
         student_name: '',
         reminder_interval: 0
     },
-    behaviors: [{
-        behavior_name: 'On task',
-        behavior_desc: 'Following directions, quietly reading'
-      }
-
-    ]
 }
 
 

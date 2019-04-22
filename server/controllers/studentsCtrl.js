@@ -9,14 +9,33 @@ module.exports = {
 
     },
 
-    viewStudent: (req, res) => {
+    viewStudent: async (req, res) => {
         const db = req.app.get('db')
         const {id} = req.params
 
-        db.view_student(id)
-        .then(student => {
-            res.status(200).send(student)
+        const studentData = await db.view_student(id)
+        const behaviorData = await db.view_behaviors(id)
+        
+        const behaviors = behaviorData.map(behavior => {
+            let {behavior_id, behavior_name, behavior_desc, assoc_student_id, behavior_type_id} = behavior
+            return {
+                behavior_id,
+                behavior_name,
+                behavior_desc,
+                assoc_student_id,
+                behavior_type_id
+            }
         })
+        const {student_id, student_name, reminder_interval} = studentData[0]
+
+        const student = {
+            student_id,
+            student_name,
+            reminder_interval,
+            behaviors
+        }
+        res.status(200).send([student])
+    
     },
     addStudent: async (req, res) => {
         const db = req.app.get('db')

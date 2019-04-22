@@ -1,0 +1,18 @@
+.navBarContainer{
+    display: flex;
+    background-color: #222;
+    color: #EEE;
+    height: 4em;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.location{
+    width: 80%;
+    margin-left: 10%;
+
+}
+.userActions{
+    width: 20%;
+    text-align: right;
+}

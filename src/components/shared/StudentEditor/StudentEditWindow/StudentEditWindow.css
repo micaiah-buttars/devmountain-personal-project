@@ -1,13 +1,52 @@
 .editWindow{
     display: flex;
-    background-color: #DDD;
-    width: 80%;
-    margin: 0 auto;
+    flex-direction: row;
     justify-content: center;
-    flex-direction: row
+    width: 85%;
+    height: 3em;
+    margin: 0 auto;
+    padding: 1em;
+    border-bottom-left-radius: 3em;
+    border-bottom-right-radius: 3em;
+    background-color: #DDD;
+    
+}
+.addContainer{
+    display: flex;
+    width: 80vw;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto
 
 }
-.behaviorCard{
+.nameContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: .5em
+}
+.studentName{
+    width: 80%;
+    padding-left: 2em;
+    height: 2em;
+    border-radius: .5em;
+}
+.reminderInterval{
+    height: 2.2em;
+    width: 15%;
+    border: white;
+}
+.buttonContainer{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1.5em;
+}
+
+
+
+
+
+/* .behaviorCard{
     display: flex;
     max-height: 25em;
     margin-bottom: 1em
@@ -46,4 +85,4 @@
     display: flex;
     width: 80vw;
     justify-content: space-between;
-}
+} */
