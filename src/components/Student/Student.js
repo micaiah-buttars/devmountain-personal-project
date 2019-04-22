@@ -20,6 +20,7 @@ class Student extends Component {
         const id = this.props.match.params.id
         this.props.requestStudent(id)
         this.props.getTimeSlots()
+
     }
     handleOptionChange = (e) => {
         this.setState({
@@ -31,7 +32,15 @@ class Student extends Component {
         this.props.updateLog({name, value})
     }
     handleSubmit = () => {
-        this.props.addLog(this.state.student_id)
+        const {student_id} = this.props.studentData.students[0]
+        const {behavior_id, teacher_id, time_slot_id, log_comment} = this.props.log
+        this.props.addLog({
+            student_id,
+            behavior_id,
+            teacher_id,
+            time_slot_id,
+            log_comment
+        })
     }
     
     render(){
@@ -50,7 +59,7 @@ class Student extends Component {
                 // handleChange={this.handleChange}
                 />
 
-        const discouraged = (behaviors)
+        const discouraged = (behaviors || [''])
             .filter(behavior => behavior.behavior_type_id === 2)
             .map((behavior, i) => {
                 return <option
@@ -58,7 +67,7 @@ class Student extends Component {
                     value={behavior.behavior_id}
                     onChange={this.handleChange}>{behavior.behavior_name}</option>
             })
-        const replacement = (behaviors)
+        const replacement = (behaviors || [''])
             .filter(behavior => behavior.behavior_type_id === 3)
             .map((behavior, i) => {
                 return <option
@@ -83,13 +92,8 @@ class Student extends Component {
 
                 {this.props.editStudent.editIsVisible && modal}
 
-
-
-
-
-
                 <div className='behaviorReportContainer'>
-                    <form>
+                    <div>
                         <label>
                             :(
                         <input type='radio' name='behavior' value='discouraged'
@@ -144,7 +148,7 @@ class Student extends Component {
                             
 
 
-                    </form>
+                    </div>
 
                 </div>
             </div>

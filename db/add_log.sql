@@ -4,7 +4,7 @@ insert into student_log (
     teacher_id,
     time_slot_id,
     log_comment,
-    log_date,
+    log_date
 ) values (
     $1,
     $2,

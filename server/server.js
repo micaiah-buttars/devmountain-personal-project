@@ -33,5 +33,5 @@ app.get('/times', students.getTimeSlots)
 app.get('/student-data/:id', students.viewStudent)
 
 app.post('/students-data', students.addStudent)
-app.post('/student-data/:id', students.addLog)
+app.post('/students-log', students.addLog)
 

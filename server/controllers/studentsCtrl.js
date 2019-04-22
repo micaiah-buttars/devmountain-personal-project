@@ -64,6 +64,7 @@ module.exports = {
 
     },
     addLog: (req, res) => {
+        console.log(req.body)
         const db = req.app.get('db')
         const {student_id, behavior_id, teacher_id, time_slot_id, log_comment, log_date} = req.body
 
