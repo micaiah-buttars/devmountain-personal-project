@@ -13,7 +13,7 @@ class Student extends Component {
         super(props)
         this.state = {
             behaviors: [''],
-            selectedOption: 'on task'
+            selectedOption: ''
         }
     }
     componentDidMount(){
@@ -23,9 +23,11 @@ class Student extends Component {
 
     }
     handleOptionChange = (e) => {
+        const {name, value} = e.target
         this.setState({
-            selectedOption: e.target.value
+            selectedOption: value
         })
+        this.props.updateLog({name, value})
     }
     handleChange = (e) => {
         const {name, value} = e.target
@@ -33,10 +35,12 @@ class Student extends Component {
     }
     handleSubmit = () => {
         const {student_id} = this.props.studentData.students[0]
-        const {behavior_id, teacher_id, time_slot_id, log_comment} = this.props.log
+        const {behavior_id, behavior_type_id, teacher_id, time_slot_id, log_comment} = this.props.log
+        let onTask = this.props.studentData.students[0].behaviors.filter(behavior => behavior.behavior_type_id === 1)
         this.props.addLog({
             student_id,
-            behavior_id,
+            behavior_id: behavior_id || onTask[0].behavior_id,
+            behavior_type_id,
             teacher_id,
             time_slot_id,
             log_comment
@@ -45,7 +49,6 @@ class Student extends Component {
     
     render(){
         console.log('PROPS', this.props)
-        console.log('STATE', this.state)
         const {student_id, student_name, reminder_interval, behaviors} = this.props.studentData.students[0]
         const student = {
             student_id,
@@ -55,8 +58,6 @@ class Student extends Component {
         }
         const modal = <StudentEditWindow
                 student={student}
-                // addStudent={this.addStudent}
-                // handleChange={this.handleChange}
                 />
 
         const discouraged = (behaviors || [''])
@@ -95,39 +96,42 @@ class Student extends Component {
                 <div className='behaviorReportContainer'>
                     <div>
                         <label>
-                            :(
-                        <input type='radio' name='behavior' value='discouraged'
-                        checked={this.state.selectedOption === 'discouraged'}
-                        onChange={this.handleOptionChange}/>
+                            <input type='radio' name='behavior_type_id' value='2'
+                            checked={this.state.selectedOption === '2'}
+                            onChange={this.handleOptionChange}/>
+                            <span>Discouraged</span>
                         </label>
 
                         <label>
-                            :)
-                        <input type='radio' name='behavior' value='on task'
-                        checked={this.state.selectedOption === 'on task'}
-                        onChange={this.handleOptionChange}/>
+                            <input type='radio' name='behavior_type_id' value='1'
+                            checked={this.state.selectedOption === '1'}
+                            onChange={this.handleOptionChange}/>
+                            <span>On Task</span>
                         </label>
 
                         <label>
-                            :D
-                        <input type='radio' name='behavior' value='replacement'
-                        checked={this.state.selectedOption === 'replacement'}
-                        onChange={this.handleOptionChange}/>
+                            <input type='radio' name='behavior_type_id' value='3'
+                            checked={this.state.selectedOption === '3'}
+                            onChange={this.handleOptionChange}/>
+                            <span>Replacement</span>
                         </label>
+                    </div>
 
-                        {this.state.selectedOption === 'discouraged' ? (
-                            <select
-                                name='behavior_id'
-                                onChange={this.handleChange}>
-                                {discouraged}
-                            </select>
-                            ) : this.state.selectedOption === 'replacement' ? (
-                            <select
-                                name='behavior_id'
-                                onChange={this.handleChange}>
-                                {replacement}
-                            </select>
-                            ) : <div></div>}
+                    {this.state.selectedOption === '2' ? (
+                        <select
+                            name='behavior_id'
+                            onChange={this.handleChange}>
+                            <option>--Select--</option>
+                            {discouraged}
+                        </select>
+                        ) : this.state.selectedOption === '3' ? (
+                        <select
+                            name='behavior_id'
+                            onChange={this.handleChange}>
+                            <option>--Select--</option>
+                            {replacement}
+                        </select>
+                        ) : <div></div>}
 
                         <input
                             type='text'
@@ -135,7 +139,6 @@ class Student extends Component {
                             name='log_comment'
                             value={this.props.log.log_comment}
                             onChange={this.handleChange}
-                            
                             />
 
                         <select
@@ -148,7 +151,7 @@ class Student extends Component {
                             
 
 
-                    </div>
+
 
                 </div>
             </div>

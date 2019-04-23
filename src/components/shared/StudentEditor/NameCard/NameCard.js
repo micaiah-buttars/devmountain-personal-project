@@ -25,7 +25,7 @@ class NameCard extends Component {
 
 
   render() {
-    const {student_name, reminder_interval} = this.props.editStudent.student
+    const {student_name, reminder_interval} = this.props.student || this.props.editStudent.student
     return (
       <div className="nameCard">
       <div>

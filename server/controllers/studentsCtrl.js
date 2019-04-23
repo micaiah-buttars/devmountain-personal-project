@@ -66,9 +66,9 @@ module.exports = {
     addLog: (req, res) => {
         console.log(req.body)
         const db = req.app.get('db')
-        const {student_id, behavior_id, teacher_id, time_slot_id, log_comment, log_date} = req.body
+        const {student_id, behavior_id, behavior_type_id, teacher_id, time_slot_id, log_comment} = req.body
 
-        db.add_log([student_id, behavior_id, teacher_id, time_slot_id, log_comment, log_date])
+        db.add_log([student_id, behavior_id, behavior_type_id, teacher_id, time_slot_id, log_comment])
         .then(log => {
             res.status(200).send(log)
         })

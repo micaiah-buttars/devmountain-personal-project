@@ -24,10 +24,6 @@ class Nav extends Component {
 }
 
 const mapState = (reduxState) => {
-  return {
-      studentData: reduxState.studentData,
-      editStudent: reduxState.editStudent
-  }
-
+  return reduxState
 }
 export default connect(mapState, {toggleEditor})(Nav)
